@@ -1,5 +1,3 @@
-
-
 #read file contents into given array
 # $1 file_path - path to file
 # $2 array_name - array to read file into
@@ -64,22 +62,14 @@ for line in "${file_lines[@]}"; do
 	[[ $game_str =~ $regex_game ]]
 	match="${BASH_REMATCH[0]}"
 	game_number="${BASH_REMATCH[1]}"
-	#echo ""
-	#echo "game_str: $game_str"
-	#echo "match_game: $match"
-	#echo "game_number: $game_number"
 
 
 	#remove game from string
 	game_str="${game_str/$match/}"
-	#echo "new_game_str: $game_str"
 
 	#split strings into draw strings
 	draws=()
 	split_string "$game_str" draws ";"
-
-	#echo ""
-	#print_array draws
 
 	#for each draw string
 	largest_red_count=0
@@ -87,7 +77,6 @@ for line in "${file_lines[@]}"; do
 	largest_green_count=0
 	
 	for draw in "${draws[@]}"; do
-		#echo ""
 		color_strings=()
 		split_string "$draw" color_strings ","
 		
@@ -96,7 +85,6 @@ for line in "${file_lines[@]}"; do
 			match="${BASH_REMATCH[0]}"
 			color_number="${BASH_REMATCH[1]}"
 			color_name="${BASH_REMATCH[2]}"
-			#echo "color_name: $color_name, color_number: $color_number"
 
 			if [[ "$color_name" == "red" ]]; then
 				if [[ "$color_number" -gt "$largest_red_count" ]]; then
@@ -130,9 +118,3 @@ done
 
 echo ""
 echo "allowed_game_id_sum: $allowed_game_id_sum"
-
-
-
-
-
-
